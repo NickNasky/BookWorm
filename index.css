@@ -1,0 +1,11 @@
+.navbar-form {
+  width: 100%;
+  padding: 10px;
+}
+.thumbnail {
+  overflow: scroll;
+  height: 90vh;
+}
+.seeMore{
+  display: none;
+}
