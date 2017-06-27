@@ -1,15 +1,19 @@
 // var googleKey = AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs;
 $(document).ready(function () {
   $(".btn").click(gbookPull);
-  $(".seeMore").click(pageUpdate)
+  $(".seeMore").click(pageUpdate);
+  $(".titleSearch").click(switchToAuthor);
 })
 var books;
-var currentPage = 1;
+var currentPage;
 var url;
+var bookAuthor;
 
 function gbookPull() {
   event.preventDefault();
-  var selected = $("input[name='query']:checked").val();
+  $(".bookPages").empty();
+  currentPage = 1;
+  selected = $("input[name='query']:checked").val();
   var search = $(".form-control").val();
   if (selected === "titleChosen") {
     url = "https://www.googleapis.com/books/v1/volumes?q=" + search + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
@@ -20,8 +24,19 @@ function gbookPull() {
   .then(function(data){
     books = data;
     bookInfo(data);
-    $(".seeMore").show();
     console.log(data);
+    return books;
+  })
+}
+
+function switchToAuthor(){
+  $("input[name='query']:checked") = "authorChosen";
+  console.log(books);
+  url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs"
+  $.get(url)
+  .then(function(data) {
+    books = data;
+    bookInfo(data);
     return books;
   })
 }
@@ -30,6 +45,7 @@ function bookInfo(data) {
   var titleArr = [];
   var imgArr = [];
   var descArr = [];
+  bookAuthor = data.items[0].volumeInfo.authors[0];
   for (var i = 0; i < data.items.length; i++) {
     titleArr[i] = data.items[i].volumeInfo.title;
     if (data.items[i].volumeInfo.imageLinks) {
@@ -45,8 +61,9 @@ function bookInfo(data) {
   }
   if ($("input[name='query']:checked").val() === "titleChosen"){
     $(".bookPages").append("<div class='row'>");
-    bookAppend(data.items[0].volumeInfo.authors[0], imgArr[0], descArr[0]);
-    $(".seeMore").text("See more from this author");
+    bookAppend(titleArr[0], imgArr[0], descArr[0]);
+    $(".titleSearch").text("Would you like to see more books from " + bookAuthor + "?");
+    $(".titleSearch").show();
   } else {
     for (var j = (currentPage-1)*8; j < 8 * currentPage; j++){
       if (j%4 === 0) {
@@ -61,6 +78,7 @@ function bookInfo(data) {
         $(".bookPages").append("</div>");
       }
     }
+    $(".seeMore").show();
   }
 }
 
@@ -73,9 +91,5 @@ function bookAppend(title, img, desc) {
 
 function pageUpdate() {
   currentPage++;
-  console.log(currentPage);
-  // if ($("input[name='query']:checked").val() = "titleChosen") {
-  //
-  // }
   bookInfo(books);
 }
