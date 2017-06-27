@@ -17,6 +17,7 @@ function gbookPull() {
   var search = $(".form-control").val();
   if (selected === "titleChosen") {
     url = "https://www.googleapis.com/books/v1/volumes?q=" + search + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
+    $(".seeMore").hide();
   } else if(selected === "authorChosen") {
     url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + search + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
   }
@@ -24,15 +25,26 @@ function gbookPull() {
   .then(function(data){
     books = data;
     bookInfo(data);
-    console.log(data);
     return books;
   })
 }
 
+function setRadio() {
+    var radio = $("#chosen");
+    radio[0].checked = true;
+    // radio.checkBoxRadio("refresh");
+}
+
 function switchToAuthor(){
-  $("input[name='query']:checked") = "authorChosen";
-  console.log(books);
+  $(".bookPages").empty();
+  setRadio();
+  // $("#chosen [value=titleChosen]").attr("checked", false);
+  // $("#chosen [value=authorChosen]").attr("checked", true);
+  console.log($("input[name='query']:checked").val())
+  console.log(bookAuthor)
   url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs"
+  $(".titleSearch").hide();
+  $(".seeMore").show();
   $.get(url)
   .then(function(data) {
     books = data;
