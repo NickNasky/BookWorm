@@ -1,3 +1,33 @@
+body{
+  margin:0;
+}
+h1 {
+  margin-top:0;
+}
+.navbar-default {
+  display: inline-block;
+  float: right;
+  height: 5vh;
+  margin-right: 10%;
+}
+.about{
+  height: 50vh;
+}
+.imgSpace1 {
+  height: 50vh;
+  background-image: url("https://usatcollege.files.wordpress.com/2014/09/139786707.jpg");
+  background-position: center;
+}
+.page-header {
+  margin-top: 0;
+  padding: 0;
+  background-image: url("http://blogs.library.duke.edu/wp-content/uploads/2014/09/Books.jpg");
+  color: #F0EA9E;
+}
+.subHeading {
+  font-size: 0.5em;
+  color: #F0EA9E;
+}
 .reviewBtn, .previewBtn{
   margin: auto;
   display: flex;

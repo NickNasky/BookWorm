@@ -100,6 +100,7 @@ function gbookPull() {
     bookInfo(data);
     console.log(books);
     return books;
+    $("main").hide();
   })
 }
 

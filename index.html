@@ -7,7 +7,43 @@
     <link rel ="stylesheet" href="index.css" type="text/css">
   </head>
   <body>
-    <form class="navbar-form navbar-left">
+    <header>
+      <div class="page-header">
+        <h1>BookWorm<br><small class="subHeading">Helping You Find More to Read From Your Favorite Authors
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#about">About BookWorm<span class="sr-only">(current)</span></a></li>
+                <li><a href="#howTo">How to Use</a></li>
+                <li><a href="#search">Search Now</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        </small></h1>
+      </div>
+    </header>
+    <main>
+      <section class="about">
+        <h1 class="text-center">What is BookWorm?</h1>
+        <p> BookWorm is a class project designed to show mastery of HTML, CSS, JavaScrips, Jquery, AJAX and other coding languages. It is also an attempt to share my love of reading with the world by enabling everyone to quickly find and purchase books from their favorite authors or find books they may have heard about. My hope is that people will be willing to explore more books when they have an easy way to do so!</p>
+      </section>
+      <div class="imgSpace1">
+      </div>
+      <section class="howTo">
+        <h1 class="text-center">How to Use BookWorm</h1>
+        <p>
+    </main>
+    <form class="navbar-form navbar-left searchBar">
       <label for="query">Would you like to search by author or title?</label>
       <input type="radio" id="chosen" name="query" value="authorChosen" checked>Author
       <input type="radio" id="chosen" name="query" value="titleChosen">Title
