@@ -1,4 +1,5 @@
 // var googleKey = AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs;
+// var greadsKey = YqTgqWmdmWowpubRQ7l1Q;
 $(document).ready(function () {
   $(".btn").click(gbookPull);
   $(".seeMore").click(pageUpdate);
@@ -8,6 +9,62 @@ var books;
 var currentPage;
 var url;
 var bookAuthor;
+var reviews;
+var isbn;
+
+function expandInfo(){
+  event.preventDefault();
+  $(".bookPages").empty();
+  $(".seeMore").hide();
+  $(".titleSearch").hide();
+  var expandedBook;
+  for (var i = 0; i < books.items.length; i++) {
+    if (this.alt === (books.items[i].volumeInfo.title).replace(/ /g, '+')){
+      expandedBook = books.items[i];
+    }
+  }
+  if (expandedBook.volumeInfo.imageLinks) {
+    var expandedImg = expandedBook.volumeInfo.imageLinks.thumbnail;
+  } else {
+    expandedImg = "http://via.placeholder.com/500x300"
+  }
+  if (expandedBook.volumeInfo.authors) {
+    var expandedAuthor = " by " + expandedBook.volumeInfo.authors[0];
+  } else {
+    expandedAuthor = "";
+  }
+  if (expandedBook.volumeInfo.description) {
+  var expandedDesc = expandedBook.volumeInfo.description;
+} else {
+  expandedDesc = "Sorry, this book doesn't seem to have an official description!"
+}
+  var expandedTitle = expandedBook.volumeInfo.title;
+  isbn = expandedBook.volumeInfo.industryIdentifiers[0].identifier;
+  var reviewUrl = "https://cors-anywhere.herokuapp.com/https://www.goodreads.com/book/isbn/" + isbn + "?key=YqTgqWmdmWowpubRQ7l1Q&format=json";
+  $.get(reviewUrl)
+  .then(function(data) {
+    $(".bookPages").append(
+      "<div class='col-xs-12 col-md-12'>" + "<div class='thumbnail'>" +
+      "<h1 class='text-center expandedHeader'>" + expandedTitle +
+      expandedAuthor + "</h1>" + "<p class='imgAndDesc'><img src=" + expandedImg
+      + " alt=" + expandedTitle + " class='img-responsive' id='cover'>" +
+      expandedDesc + "</p><a class='btn btn-primary reviewBtn' role='button'>Show Reviews for " + expandedTitle + "</a> <a class='btn btn-default previewBtn' role='button'>See Previews for " + expandedTitle + "</a><div class='widget'>" + data.reviews_widget + "</div>" + "</p>" + "</div> " + "</div>");
+      $(".widget").hide();
+      $("#viewerCanvas").hide();
+      $(".reviewBtn").click(showReview);
+      $(".previewBtn").click(showPreview);
+  })
+}
+
+function showReview() {
+  $(".widget").toggle();
+  $("#viewerCanvas").hide();
+}
+
+function showPreview() {
+  $(".widget").hide();
+  $("#viewerCanvas").toggle()
+}
 
 function gbookPull() {
   event.preventDefault();
@@ -16,15 +73,16 @@ function gbookPull() {
   selected = $("input[name='query']:checked").val();
   var search = $(".form-control").val();
   if (selected === "titleChosen") {
-    url = "https://www.googleapis.com/books/v1/volumes?q=" + search + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
+    url = "https://www.googleapis.com/books/v1/volumes?q=+intitle:" + search + "&orderBy=relevance&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
     $(".seeMore").hide();
   } else if(selected === "authorChosen") {
-    url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + search + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
+    url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + search + "&orderBy=relevance&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
   }
   $.get(url)
   .then(function(data){
     books = data;
     bookInfo(data);
+    console.log(books);
     return books;
   })
 }
@@ -32,16 +90,11 @@ function gbookPull() {
 function setRadio() {
     var radio = $("#chosen");
     radio[0].checked = true;
-    // radio.checkBoxRadio("refresh");
 }
 
 function switchToAuthor(){
   $(".bookPages").empty();
   setRadio();
-  // $("#chosen [value=titleChosen]").attr("checked", false);
-  // $("#chosen [value=authorChosen]").attr("checked", true);
-  console.log($("input[name='query']:checked").val())
-  console.log(bookAuthor)
   url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs"
   $(".titleSearch").hide();
   $(".seeMore").show();
@@ -92,13 +145,14 @@ function bookInfo(data) {
     }
     $(".seeMore").show();
   }
+  $(".img-responsive").click(expandInfo);
 }
 
 function bookAppend(title, img, desc) {
   $(".bookPages").append(
     "<div class='col-xs-6 col-md-3'>" + "<div class='thumbnail'>" +
     "<h1 class='text-center'>" + title + "</h1>" +
-    "<img src=" + img + " alt=" + title + " class='img-responsive'>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>" + "</div>" + "</div>" + "</div>");
+    "<a><img src=" + img + " alt=" + title.replace(/ /g, '+') + " class='img-responsive'></a>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>" + "</div>" + "</div>" + "</div>");
 }
 
 function pageUpdate() {
