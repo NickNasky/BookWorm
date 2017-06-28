@@ -11,6 +11,7 @@ var url;
 var bookAuthor;
 var reviews;
 var isbn;
+var forSale;
 
 function expandInfo(){
   event.preventDefault();
@@ -41,6 +42,17 @@ function expandInfo(){
   var expandedTitle = expandedBook.volumeInfo.title;
   isbn = expandedBook.volumeInfo.industryIdentifiers[0].identifier;
   var reviewUrl = "https://cors-anywhere.herokuapp.com/https://www.goodreads.com/book/isbn/" + isbn + "?key=YqTgqWmdmWowpubRQ7l1Q&format=json";
+  forSale = expandedBook.saleInfo.saleability;
+  if (forSale === "FOR_SALE") {
+    var bookPrice = expandedBook.saleInfo.listPrice.amount;
+    var buyBook = expandedBook.saleInfo.buyLink;
+    if (expandedBook.saleInfo.isEbook) {
+      var ebook = "This book is available as an eBook!";
+    } else {
+      var ebook = "Sorry, this book is not available as an eBook."
+    }
+  }
+
   $.get(reviewUrl)
   .then(function(data) {
     $(".bookPages").append(
@@ -48,22 +60,26 @@ function expandInfo(){
       "<h1 class='text-center expandedHeader'>" + expandedTitle +
       expandedAuthor + "</h1>" + "<p class='imgAndDesc'><img src=" + expandedImg
       + " alt=" + expandedTitle + " class='img-responsive' id='cover'>" +
-      expandedDesc + "</p><a class='btn btn-primary reviewBtn' role='button'>Show Reviews for " + expandedTitle + "</a> <a class='btn btn-default previewBtn' role='button'>See Previews for " + expandedTitle + "</a><div class='widget'>" + data.reviews_widget + "</div>" + "</p>" + "</div> " + "</div>");
+      expandedDesc + "</p><a class='btn btn-primary reviewBtn' role='button'>Show Reviews for " + expandedTitle + "</a> <a class='btn btn-default previewBtn' role='button'>See Google Books Availability of " + expandedTitle + "</a><div class='viewerCanvas'><ul><li>Price: " + bookPrice +"</li><li>eBook Availability: " + ebook + "<li><a href='" + buyBook + "'>Buy Now!</a></li></ul>" + "</div><div class='widget'>" + data.reviews_widget + "</div>" + "</p>" + "</div> " + "</div>");
       $(".widget").hide();
-      $("#viewerCanvas").hide();
+      $(".viewerCanvas").hide();
       $(".reviewBtn").click(showReview);
-      $(".previewBtn").click(showPreview);
+      $(".previewBtn").click(showAvailibity);
   })
 }
 
 function showReview() {
   $(".widget").toggle();
-  $("#viewerCanvas").hide();
+  $(".viewerCanvas").hide();
 }
 
-function showPreview() {
-  $(".widget").hide();
-  $("#viewerCanvas").toggle()
+function showAvailibity() {
+  if (forSale !== "FOR_SALE") {
+    alert("Sorry, this book is not available to purchase through Google Books.")
+  } else {
+    $(".widget").hide();
+    $(".viewerCanvas").toggle()
+  }
 }
 
 function gbookPull() {
