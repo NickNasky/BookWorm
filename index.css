@@ -1,37 +1,104 @@
 body{
-  margin:0;
+  margin: 0;
+  background-color: #F5EFCE;
+  color: #317E18;
 }
 h1 {
   margin-top:0;
+}
+p {
+  margin: 5%;
+  font-size: 1.5em;
+}
+.searchHeader{
+  display: flex;
+  justify-content: center;
+}
+#chosen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 .navbar-default {
   display: inline-block;
   float: right;
   height: 5vh;
   margin-right: 10%;
+  margin-bottom: 1%;
+  margin-top: 0;
+  background-color: #317E18;
 }
-.about{
+.navbar-default .navbar-nav>li>a {
+    color: #F5EFCE;
+}
+.navbar-default .navbar-nav>li>a:hover {
+  color: #F0EA9E;
+  text-shadow: .5px .5px #F5EFCE;
+}
+#about {
+  margin-top: 0;
+  padding-top: 10%;
+  height: 75vh;
+}
+#howTo {
+  margin-top: 5%;
   height: 50vh;
+}
+.imgSpace1, .imgSpace2 {
+  height: 50vh;
+  background-position: center;
 }
 .imgSpace1 {
-  height: 50vh;
-  background-image: url("https://usatcollege.files.wordpress.com/2014/09/139786707.jpg");
-  background-position: center;
+    background-image: url("https://usatcollege.files.wordpress.com/2014/09/139786707.jpg");
+}
+.imgSpace2 {
+  background-image: url("https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-master768.jpg");
 }
 .page-header {
   margin-top: 0;
   padding: 0;
   background-image: url("http://blogs.library.duke.edu/wp-content/uploads/2014/09/Books.jpg");
+  width: 100%;
   color: #F0EA9E;
+  position: fixed;
+  z-index: 1;
 }
 .subHeading {
   font-size: 0.5em;
   color: #F0EA9E;
 }
+.viewerCanvas{
+    color: #F0EA9E;
+}
+.viewerCanvas a{
+    color: #F5EFCE;
+}
+.viewerCanvas a:hover {
+    color: #F0EA9E;
+}
 .reviewBtn, .previewBtn{
   margin: auto;
   display: flex;
   justify-content: space-around;
+  background-color: #F0EA9E;
+  border-color: #F5EFCE;
+  color: #317E18;
+}
+.seeMore, .titleSearch {
+  background-color: #317E18;
+  color: #F0EA9E;
+}
+.reviewBtn:hover, .previewBtn:hover{
+  background-color: #317E18;
+  color: #F0EA9E;
+  border-color: #F5EFCE;
+}
+.seeMore:hover, .titleSearch:hover {
+  background-color: #F0EA9E;
+  border-color: #317E18;
+  color: #317E18;
 }
 .expandedHeader{
   padding-bottom: 1em;
@@ -39,10 +106,21 @@ h1 {
 .navbar-form {
   width: 100%;
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top:5%;
+  margin-bottom:5%;
+}
+.form-group{
+  margin-left: 1%;
 }
 .thumbnail {
   overflow: scroll;
   height: 90vh;
+  background-color:#317E18;
+}
+.thumbnail p, .thumbnail h1 {
+  color: #F5EFCE;
 }
 .seeMore {
   display: none;
@@ -61,40 +139,3 @@ h1 {
 .imgAndDesc {
   display: flex;
   justify-content: space-around;
-}
-#goodreads-widget {
-font-family: georgia, serif;
-display: inline-block;
-padding: auto;
-margin: auto;
-margin-top: 0;
-width:100%;
-}
-#goodreads-widget h1 {
-font-weight:normal;
-font-size: 16px;
-border-bottom: 1px solid #BBB596;
-margin-bottom: 0;
-}
-#goodreads-widget a {
-text-decoration: none;
-color:#660;
-}
-iframe{
-background-color: #fff;
-}
-#goodreads-widget a:hover { text-decoration: underline; }
-#goodreads-widget a:active {
-color:#660;
-}
-#gr_footer {
-width: 100%;
-border-top: 1px solid #BBB596;
-text-align: right;
-}
-#goodreads-widget .gr_branding{
-color: #382110;
-font-size: 1em;
-text-decoration: none;
-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}

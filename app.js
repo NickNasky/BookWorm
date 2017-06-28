@@ -4,6 +4,7 @@ $(document).ready(function () {
   $(".btn").click(gbookPull);
   $(".seeMore").click(pageUpdate);
   $(".titleSearch").click(switchToAuthor);
+  $("nav").click(backToMain);
 })
 var books;
 var currentPage;
@@ -12,6 +13,13 @@ var bookAuthor;
 var reviews;
 var isbn;
 var forSale;
+
+function backToMain() {
+  $("main").show();
+  $(".bookPages").empty();
+  $(".seeMore").hide();
+  $(".titleSearch").hide();
+}
 
 function expandInfo(){
   event.preventDefault();
@@ -66,6 +74,9 @@ function expandInfo(){
       $(".reviewBtn").click(showReview);
       $(".previewBtn").click(showAvailibity);
   })
+  .catch(function (e){
+    alert("Sorry, we couldn't find what you were looking for. Please enter a new value.")
+  })
 }
 
 function showReview() {
@@ -84,6 +95,7 @@ function showAvailibity() {
 
 function gbookPull() {
   event.preventDefault();
+  $("main").hide();
   $(".bookPages").empty();
   currentPage = 1;
   selected = $("input[name='query']:checked").val();
@@ -100,7 +112,6 @@ function gbookPull() {
     bookInfo(data);
     console.log(books);
     return books;
-    $("main").hide();
   })
 }
 
