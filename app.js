@@ -35,7 +35,7 @@ function expandInfo(){
   if (expandedBook.volumeInfo.imageLinks) {
     var expandedImg = expandedBook.volumeInfo.imageLinks.thumbnail;
   } else {
-    expandedImg = "http://via.placeholder.com/500x300"
+    expandedImg = "https://via.placeholder.com/500x300"
   }
   if (expandedBook.volumeInfo.authors) {
     var expandedAuthor = " by " + expandedBook.volumeInfo.authors[0];
@@ -138,7 +138,12 @@ function bookInfo(data) {
   var titleArr = [];
   var imgArr = [];
   var descArr = [];
-  bookAuthor = data.items[0].volumeInfo.authors[0];
+  var bookAuthor;
+  if (data.items[0].volumeInfo.authors) {
+    bookAuthor = " by " + expandedBook.volumeInfo.authors[0];
+  } else {
+    bookAuthor = "";
+  }
   for (var i = 0; i < data.items.length; i++) {
     titleArr[i] = data.items[i].volumeInfo.title;
     if (data.items[i].volumeInfo.imageLinks) {
@@ -155,7 +160,7 @@ function bookInfo(data) {
   if ($("input[name='query']:checked").val() === "titleChosen"){
     $(".bookPages").append("<div class='row'>");
     bookAppend(titleArr[0], imgArr[0], descArr[0]);
-    $(".titleSearch").text("Would you like to see more books from " + bookAuthor + "?");
+    $(".titleSearch").text("Would you like to see more books" + bookAuthor + "?");
     $(".titleSearch").show();
   } else {
     for (var j = (currentPage-1)*8; j < 8 * currentPage; j++){
