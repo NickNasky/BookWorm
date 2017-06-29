@@ -1,10 +1,12 @@
 // var googleKey = AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs;
 // var greadsKey = YqTgqWmdmWowpubRQ7l1Q;
 $(document).ready(function () {
-  $(".btn").click(gbookPull);
+  $(".searchBtn").click(gbookPull);
   $(".seeMore").click(pageUpdate);
   $(".titleSearch").click(switchToAuthor);
   $("nav").click(backToMain);
+  $(".seeMore").hide();
+  $(".titleSearch").hide();
 })
 var books;
 var currentPage;
@@ -35,7 +37,7 @@ function expandInfo(){
   if (expandedBook.volumeInfo.imageLinks) {
     var expandedImg = expandedBook.volumeInfo.imageLinks.thumbnail;
   } else {
-    expandedImg = "https://via.placeholder.com/500x300"
+    expandedImg = "http://via.placeholder.com/500x300"
   }
   if (expandedBook.volumeInfo.authors) {
     var expandedAuthor = " by " + expandedBook.volumeInfo.authors[0];
@@ -45,7 +47,7 @@ function expandInfo(){
   if (expandedBook.volumeInfo.description) {
   var expandedDesc = expandedBook.volumeInfo.description;
 } else {
-  expandedDesc = "Sorry, this book doesn't seem to have an official description!"
+  expandedDesc = "This book doesn't seem to have an official description!"
 }
   var expandedTitle = expandedBook.volumeInfo.title;
   isbn = expandedBook.volumeInfo.industryIdentifiers[0].identifier;
@@ -60,7 +62,6 @@ function expandInfo(){
       var ebook = "Sorry, this book is not available as an eBook."
     }
   }
-
   $.get(reviewUrl)
   .then(function(data) {
     $(".bookPages").append(
@@ -75,7 +76,9 @@ function expandInfo(){
       $(".previewBtn").click(showAvailibity);
   })
   .catch(function (e){
-    alert("Sorry, we couldn't find what you were looking for. Please enter a new value.")
+    alert("Sorry, we couldn't find what you were looking for. Please enter a new value");
+    gbookPull();
+    $(".bookPages").show();
   })
 }
 
@@ -110,7 +113,6 @@ function gbookPull() {
   .then(function(data){
     books = data;
     bookInfo(data);
-    console.log(books);
     return books;
   })
 }
@@ -138,12 +140,7 @@ function bookInfo(data) {
   var titleArr = [];
   var imgArr = [];
   var descArr = [];
-  var bookAuthor;
-  if (data.items[0].volumeInfo.authors) {
-    bookAuthor = " by " + expandedBook.volumeInfo.authors[0];
-  } else {
-    bookAuthor = "";
-  }
+  bookAuthor = data.items[0].volumeInfo.authors[0];
   for (var i = 0; i < data.items.length; i++) {
     titleArr[i] = data.items[i].volumeInfo.title;
     if (data.items[i].volumeInfo.imageLinks) {
@@ -160,7 +157,7 @@ function bookInfo(data) {
   if ($("input[name='query']:checked").val() === "titleChosen"){
     $(".bookPages").append("<div class='row'>");
     bookAppend(titleArr[0], imgArr[0], descArr[0]);
-    $(".titleSearch").text("Would you like to see more books" + bookAuthor + "?");
+    $(".titleSearch").text("Would you like to see more books from " + bookAuthor + "?");
     $(".titleSearch").show();
   } else {
     for (var j = (currentPage-1)*8; j < 8 * currentPage; j++){
