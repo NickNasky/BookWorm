@@ -9,6 +9,7 @@ h1 {
 }
 p {
   margin: 5%;
+  margin-top: 0;
   font-size: 1.5em;
   font-family: "Roboto", sans-serif;
 }
@@ -51,23 +52,13 @@ p {
   color: #E3CDA4;
   text-shadow: .5px .5px #E3CDA4;
 }
-#about {
-  margin-top: 0;
+#howTo {
   padding-top: 15%;
   height: auto;
 }
-#howTo {
-  margin-top: 5%;
-  height: auto;
-}
-.imgSpace1, .imgSpace2 {
+.imgSpace1{
   height: 50vh;
   background-position: center;
-}
-.imgSpace1 {
-    background-image: url("https://typeset-beta.imgix.net/rehost%2F2016%2F9%2F13%2F08310344-1bd9-47fa-ac59-d390f5b8f1e2.jpg");
-}
-.imgSpace2 {
   background-image: url("https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-master768.jpg");
 }
 .page-header{
@@ -108,6 +99,21 @@ p {
   border-color: #E3CDA4;
   color: #703030;
 }
+.expandBtn{
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+  color: #703030;
+}
+.expandLink {
+  color: #703030;
+  padding-bottom: 5%;
+  padding-top: 0;
+  display: inline-block;
+}
+.expandLink:hover{
+  color: #C77966;
+}
 .seeMore, .titleSearch {
   background-color: #703030;
   color: #E3CDA4;
@@ -117,25 +123,45 @@ p {
   color: #E3CDA4;
   border-color: #E3CDA4;
 }
+.expandBtn:hover{
+  color: #703030;
+  border-color: #703030;
+}
 .reviewBtn:active, .previewBtn:active{
   background-color: #703030;
   color: #E3CDA4;
   border-color: #E3CDA4;
+}
+.expandBtn:active{
+  color: #703030;
+  border-color: #703030;
 }
 .reviewBtn:focus, .previewBtn:focus{
   background-color: #703030;
   color: #E3CDA4;
   border-color: #E3CDA4;
 }
+.expandBtn:focus{
+  color: #703030;
+  border-color: #703030;
+}
 .reviewBtn:active:focus, .previewBtn:active:focus{
   background-color: #703030;
   color: #E3CDA4;
   border-color: #E3CDA4;
 }
+.expandBtn:active:focus{
+  color: #703030;
+  border-color: #703030;
+}
 .reviewBtn:active:hover, .previewBtn:active:hover{
   background-color: #703030;
   color: #E3CDA4;
   border-color: #E3CDA4;
+}
+.expandBtn:active:hover{
+  color: #703030;
+  border-color: #703030;
 }
 .seeMore:hover, .titleSearch:hover {
   background-color: #E3CDA4;
@@ -166,8 +192,16 @@ p {
   border-color: #7E827A;
   box-shadow: .1em .1em .1em .1em #2F343B;
 }
-.thumbnail p, .thumbnail h1 {
+.thumbnail p{
   color: #E3CDA4;
+}
+.thumbnail h1 {
+  color: #E3CDA4;
+  text-shadow: .1em .1em .1em #2F343B;
+}
+div .thumbnail{
+    margin-top: 5%;
+    margin-bottom: 0;
 }
 .seeMore {
   display: none;
@@ -178,8 +212,8 @@ p {
   margin: auto;
 }
 #cover {
-  display: inline-block;
-  width: 30%;
+  display: inline-flex;
+  width: 100%;
   height: 50vh;
   margin: 10px;
 }

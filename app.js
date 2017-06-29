@@ -194,11 +194,14 @@ function bookAppend(title, img, desc) {
   $(".bookPages").append(
     "<div class='col-xs-6 col-md-3'>" + "<div class='thumbnail'>" +
     "<h1 class='text-center'>" + title + "</h1>" +
-    "<a><img src=" + img + " alt=" + title.replace(/ /g, '+') + " class='img-responsive'></a>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>"+ "</div>" + "</div><a class='expandLink'>'Read More'</a>" + "</div>");
+    "<a><img src=" + img + " alt=" + title.replace(/ /g, '+') + " class='img-responsive'></a>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>"+ "</div>" + "</div><a class='expandBtn'>To Reviews</a>" + "</div>");
 }
 
 function pageUpdate() {
   currentPage++;
+  if (currentPage > 5){
+    alert("No more books are available for this search. Start another to get more!")
+  }
   bookInfo(books);
 }
 function displayLoading() {
