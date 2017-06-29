@@ -1,18 +1,30 @@
 body{
   margin: 0;
-  background-color: #F5EFCE;
-  color: #317E18;
+  background-color: #E3CDA4;
+  color: #703030;
 }
 h1 {
-  margin-top:0;
+  margin-top: 0;
+  font-family: "Old Standard TT", serif;
 }
 p {
   margin: 5%;
   font-size: 1.5em;
+  font-family: "Roboto", sans-serif;
+}
+#bigNail{
+  height: auto;
+}
+.hide {
+  display: none;
+}
+.loading {
+  margin-left: 35%;
 }
 .searchHeader{
   display: flex;
   justify-content: center;
+  padding-top: 5%;
 }
 #chosen {
   display: flex;
@@ -28,77 +40,107 @@ p {
   margin-right: 10%;
   margin-bottom: 1%;
   margin-top: 0;
-  background-color: #317E18;
+  background-color: #703030;
+  border-color: #7E827A;
+  font-family: "Old Standard TT", serif;
 }
 .navbar-default .navbar-nav>li>a {
-    color: #F5EFCE;
+    color: #E3CDA4;
 }
 .navbar-default .navbar-nav>li>a:hover {
-  color: #F0EA9E;
-  text-shadow: .5px .5px #F5EFCE;
+  color: #E3CDA4;
+  text-shadow: .5px .5px #E3CDA4;
 }
 #about {
   margin-top: 0;
-  padding-top: 10%;
-  height: 75vh;
+  padding-top: 15%;
+  height: auto;
 }
 #howTo {
   margin-top: 5%;
-  height: 50vh;
+  height: auto;
 }
 .imgSpace1, .imgSpace2 {
   height: 50vh;
   background-position: center;
 }
 .imgSpace1 {
-    background-image: url("https://usatcollege.files.wordpress.com/2014/09/139786707.jpg");
+    background-image: url("https://typeset-beta.imgix.net/rehost%2F2016%2F9%2F13%2F08310344-1bd9-47fa-ac59-d390f5b8f1e2.jpg");
 }
 .imgSpace2 {
   background-image: url("https://static01.nyt.com/images/2015/10/24/opinion/24manguel/24manguel-master768.jpg");
 }
-.page-header {
+.page-header{
   margin-top: 0;
   padding: 0;
   background-image: url("https://blogs.library.duke.edu/wp-content/uploads/2014/09/Books.jpg");
   width: 100%;
-  color: #F0EA9E;
+  color: #E3CDA4;
+  text-shadow: .1em .1em .1em #2F343B;
   position: fixed;
   z-index: 1;
 }
+.page-header h1 {
+  margin-top: 1%;
+  margin-left: 2%;
+  font-family: "Amatic SC", cursive;
+  font-size: 3em;
+}
 .subHeading {
   font-size: 0.5em;
-  color: #F0EA9E;
+  color: #E3CDA4;
+  text-shadow: .1em .1em .1em #2F343B;
 }
 .viewerCanvas{
-    color: #F0EA9E;
+    color: #E3CDA4;
 }
 .viewerCanvas a{
-    color: #F5EFCE;
+    color: #E3CDA4;
 }
 .viewerCanvas a:hover {
-    color: #F0EA9E;
+    color: #E3CDA4;
 }
 .reviewBtn, .previewBtn{
   margin: auto;
   display: flex;
   justify-content: space-around;
-  background-color: #F0EA9E;
-  border-color: #F5EFCE;
-  color: #317E18;
+  background-color: #E3CDA4;
+  border-color: #E3CDA4;
+  color: #703030;
 }
 .seeMore, .titleSearch {
-  background-color: #317E18;
-  color: #F0EA9E;
+  background-color: #703030;
+  color: #E3CDA4;
 }
 .reviewBtn:hover, .previewBtn:hover{
-  background-color: #317E18;
-  color: #F0EA9E;
-  border-color: #F5EFCE;
+  background-color: #703030;
+  color: #E3CDA4;
+  border-color: #E3CDA4;
+}
+.reviewBtn:active, .previewBtn:active{
+  background-color: #703030;
+  color: #E3CDA4;
+  border-color: #E3CDA4;
+}
+.reviewBtn:focus, .previewBtn:focus{
+  background-color: #703030;
+  color: #E3CDA4;
+  border-color: #E3CDA4;
+}
+.reviewBtn:active:focus, .previewBtn:active:focus{
+  background-color: #703030;
+  color: #E3CDA4;
+  border-color: #E3CDA4;
+}
+.reviewBtn:active:hover, .previewBtn:active:hover{
+  background-color: #703030;
+  color: #E3CDA4;
+  border-color: #E3CDA4;
 }
 .seeMore:hover, .titleSearch:hover {
-  background-color: #F0EA9E;
-  border-color: #317E18;
-  color: #317E18;
+  background-color: #E3CDA4;
+  border-color: #703030;
+  color: #703030;
 }
 .expandedHeader{
   padding-bottom: 1em;
@@ -114,13 +156,18 @@ p {
 .form-group{
   margin-left: 1%;
 }
+.searchBar {
+  margin-top: 0;
+}
 .thumbnail {
-  overflow: scroll;
+  overflow: hidden;
   height: 90vh;
-  background-color:#317E18;
+  background-color:#703030;
+  border-color: #7E827A;
+  box-shadow: .1em .1em .1em .1em #2F343B;
 }
 .thumbnail p, .thumbnail h1 {
-  color: #F5EFCE;
+  color: #E3CDA4;
 }
 .seeMore {
   display: none;

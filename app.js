@@ -15,6 +15,7 @@ var bookAuthor;
 var reviews;
 var isbn;
 var forSale;
+var loading = $(".loading");
 
 function backToMain() {
   $("main").show();
@@ -28,6 +29,7 @@ function expandInfo(){
   $(".bookPages").empty();
   $(".seeMore").hide();
   $(".titleSearch").hide();
+  displayLoading();
   var expandedBook;
   for (var i = 0; i < books.items.length; i++) {
     if (this.alt === (books.items[i].volumeInfo.title).replace(/ /g, '+')){
@@ -64,8 +66,9 @@ function expandInfo(){
   }
   $.get(reviewUrl)
   .then(function(data) {
+    hideLoading();
     $(".bookPages").append(
-      "<div class='col-xs-12 col-md-12'>" + "<div class='thumbnail'>" +
+      "<div class='col-xs-12 col-md-12'>" + "<div id='bigNail' class='thumbnail'>" +
       "<h1 class='text-center expandedHeader'>" + expandedTitle +
       expandedAuthor + "</h1>" + "<p class='imgAndDesc'><img src=" + expandedImg
       + " alt=" + expandedTitle + " class='img-responsive' id='cover'>" +
@@ -77,8 +80,9 @@ function expandInfo(){
   })
   .catch(function (e){
     alert("Sorry, we couldn't find what you were looking for. Please enter a new value");
-    gbookPull();
-    $(".bookPages").show();
+    $(".bookPages").empty()
+    $("main").show();
+    $(".loading").hide();
   })
 }
 
@@ -98,9 +102,12 @@ function showAvailibity() {
 
 function gbookPull() {
   event.preventDefault();
+  displayLoading();
   $("main").hide();
   $(".bookPages").empty();
   currentPage = 1;
+  $(".titleSearch").hide();
+  $(".seeMore").hide();
   selected = $("input[name='query']:checked").val();
   var search = $(".form-control").val();
   if (selected === "titleChosen") {
@@ -108,6 +115,7 @@ function gbookPull() {
     $(".seeMore").hide();
   } else if(selected === "authorChosen") {
     url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + search + "&orderBy=relevance&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs";
+    $(".titleSearch").hide();
   }
   $.get(url)
   .then(function(data){
@@ -123,11 +131,11 @@ function setRadio() {
 }
 
 function switchToAuthor(){
+  displayLoading();
   $(".bookPages").empty();
+  $(".titleSearch").hide();
   setRadio();
   url = "https://www.googleapis.com/books/v1/volumes?q=+inauthor:" + bookAuthor + "&maxResults=40&key=AIzaSyBdLgp9midvmN0f1wseCb27cHRBdFZY3Rs"
-  $(".titleSearch").hide();
-  $(".seeMore").show();
   $.get(url)
   .then(function(data) {
     books = data;
@@ -140,6 +148,9 @@ function bookInfo(data) {
   var titleArr = [];
   var imgArr = [];
   var descArr = [];
+  hideLoading();
+  $(".seeMore").hide();
+  $(".titleSearch").hide();
   bookAuthor = data.items[0].volumeInfo.authors[0];
   for (var i = 0; i < data.items.length; i++) {
     titleArr[i] = data.items[i].volumeInfo.title;
@@ -176,16 +187,24 @@ function bookInfo(data) {
     $(".seeMore").show();
   }
   $(".img-responsive").click(expandInfo);
+  $(".expandLink").click(expandInfo);
 }
 
 function bookAppend(title, img, desc) {
   $(".bookPages").append(
     "<div class='col-xs-6 col-md-3'>" + "<div class='thumbnail'>" +
     "<h1 class='text-center'>" + title + "</h1>" +
-    "<a><img src=" + img + " alt=" + title.replace(/ /g, '+') + " class='img-responsive'></a>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>" + "</div>" + "</div>" + "</div>");
+    "<a><img src=" + img + " alt=" + title.replace(/ /g, '+') + " class='img-responsive'></a>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>"+ "</div>" + "</div><a class='expandLink'>'Read More'</a>" + "</div>");
 }
 
 function pageUpdate() {
   currentPage++;
   bookInfo(books);
+}
+function displayLoading() {
+  loading.removeClass('hide')
+}
+
+function hideLoading() {
+  loading.addClass('hide')
 }

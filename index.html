@@ -5,6 +5,7 @@
     <title>What Should I Read Next?</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel ="stylesheet" href="index.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Old+Standard+TT|Roboto" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -52,10 +53,13 @@
       <input type="radio" id="chosen" name="query" value="titleChosen">Title
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Search">
-      <button type="submit" class="searchBtn btn btn-default">Submit</button>
+        <button type="submit" class="searchBtn btn btn-default">Submit</button>
       </div>
     </form>
     <br>
+    <div class="row justify-content-center">
+      <img class="loading hide justify-content-center" width="400em" height="250vh" src="https://www.imagineme.in/assets/images/loader.gif" alt="loading screen">
+    </div>
     <div class="bookPages">
     </div>
     <a class="btn btn-default seeMore" role="button">See More</a>
