@@ -30,9 +30,10 @@ function expandInfo(){
   $(".seeMore").hide();
   $(".titleSearch").hide();
   displayLoading();
+  var title = $(this).attr("data-title");
   var expandedBook;
   for (var i = 0; i < books.items.length; i++) {
-    if (this.alt === (books.items[i].volumeInfo.title).replace(/ /g, '+')){
+    if (this.alt === (books.items[i].volumeInfo.title).replace(/ /g, '+') || title ===(books.items[i].volumeInfo.title).replace(/ /g, '+')){
       expandedBook = books.items[i];
     }
   }
@@ -187,14 +188,14 @@ function bookInfo(data) {
     $(".seeMore").show();
   }
   $(".img-responsive").click(expandInfo);
-  $(".expandLink").click(expandInfo);
+  $(".expandBtn").click(expandInfo);
 }
 
 function bookAppend(title, img, desc) {
   $(".bookPages").append(
     "<div class='col-xs-6 col-md-3'>" + "<div class='thumbnail'>" +
     "<h1 class='text-center'>" + title + "</h1>" +
-    "<a><img src=" + img + " alt=" + title.replace(/ /g, '+') + " class='img-responsive'></a>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>"+ "</div>" + "</div><a class='expandBtn'>To Reviews</a>" + "</div>");
+    "<a><img src=" + img + " alt=" + title.replace(/ /g, '+') + " class='img-responsive'></a>" + "<div class = 'caption'>"+ "<p>" + desc + "</p>"+ "</div>" + "</div><a data-title='" + title.replace(/ /g, '+') + "' class='expandBtn'>To Reviews</a>" + "</div>");
 }
 
 function pageUpdate() {
