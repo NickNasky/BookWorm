@@ -16,6 +16,10 @@ p {
 #bigNail{
   height: auto;
 }
+.easyRead {
+  background-color: rgba(126, 130,122, .5);
+  width: 50%;
+}
 .hide {
   display: none;
 }
@@ -25,7 +29,7 @@ p {
 .searchHeader{
   display: flex;
   justify-content: center;
-  padding-top: 5%;
+  padding-top: 2em;
 }
 #chosen {
   display: flex;
@@ -34,13 +38,18 @@ p {
   margin-left: 1%;
   margin-right: 1%;
 }
+.grayBackground {
+  background-color: rgba(126, 130,122, .5);
+  width: 50%;
+}
 .navbar-default {
   display: inline-block;
+  font-size: 1.5em;
   float: right;
   height: 5vh;
   margin-right: 10%;
   margin-bottom: 1%;
-  margin-top: 0;
+  margin-top: 2%;
   background-color: #703030;
   border-color: #7E827A;
   font-family: "Old Standard TT", serif;
@@ -63,6 +72,8 @@ p {
 }
 .page-header{
   margin-top: 0;
+  display: flex;
+  justify-content: space-between;
   padding: 0;
   background-image: url("https://blogs.library.duke.edu/wp-content/uploads/2014/09/Books.jpg");
   width: 100%;
@@ -72,7 +83,6 @@ p {
   z-index: 1;
 }
 .page-header h1 {
-  margin-top: 1%;
   margin-left: 2%;
   font-family: "Amatic SC", cursive;
   font-size: 3em;
@@ -176,7 +186,7 @@ p {
   padding: 10px;
   display: flex;
   justify-content: center;
-  margin-top:5%;
+  padding-top:5%;
   margin-bottom:5%;
 }
 .form-group{

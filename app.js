@@ -26,7 +26,8 @@ function backToMain() {
 
 function expandInfo(){
   event.preventDefault();
-  $(".bookPages").empty();
+  $(".thumbnail").hide();
+  $(".expandBtn").hide();
   $(".seeMore").hide();
   $(".titleSearch").hide();
   displayLoading();
@@ -81,9 +82,9 @@ function expandInfo(){
   })
   .catch(function (e){
     alert("Sorry, we couldn't find what you were looking for. Please enter a new value");
-    $(".bookPages").empty()
-    $("main").show();
-    $(".loading").hide();
+    $(".thumbnail").show();
+    $(".expandBtn").show();
+    hideLoading();
   })
 }
 
@@ -149,7 +150,6 @@ function bookInfo(data) {
   var titleArr = [];
   var imgArr = [];
   var descArr = [];
-  hideLoading();
   $(".seeMore").hide();
   $(".titleSearch").hide();
   bookAuthor = data.items[0].volumeInfo.authors[0];
@@ -189,6 +189,7 @@ function bookInfo(data) {
   }
   $(".img-responsive").click(expandInfo);
   $(".expandBtn").click(expandInfo);
+    hideLoading();
 }
 
 function bookAppend(title, img, desc) {
