@@ -29,7 +29,7 @@ p {
 .searchHeader{
   display: flex;
   justify-content: center;
-  padding-top: 2em;
+  padding-top: 4em;
 }
 #chosen {
   display: flex;
